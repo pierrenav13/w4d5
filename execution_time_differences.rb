@@ -1,6 +1,6 @@
 #my_min
 
-def my_min_v1(list)
+def my_min_v1(list) #O(n^2)
   min = list.first
 
   list.each_with_index do |num1, idx1|
@@ -17,7 +17,7 @@ def my_min_v1(list)
   min
 end
 
-def my_min_v2(list)
+def my_min_v2(list) #O(n)
   min = list.first
   list.each { |num| min = num if num < min }
   min
@@ -29,12 +29,40 @@ list1 = [ 0, 3, 5, 4, -5, 10, 1, 90 ]
 
 #largest_contiguous_subsum
 
-def max_subarry_v1
+def max_subsum_v1(list) #O(n^2)
+  sub_array_sums = []
+
+  (0...list.length).each do |i|
+    (i...list.length).each do |j|
+      sub_array_sums << list[i..j].sum
+    end
+  end
+  sub_array_sums.max
 end
 
-def max_subarry_v2
+def max_subsum_v2(list)
+  max = list.first
+  sum = 0
+
+  list.each do |num|
+    sum = 0 if sum < 0
+
+    sum += num
+
+    max = sum if sum > max
+  end
+
+  max
 end
 
 list2 = [5, 3, -7]
 list3 = [2, 3, -6, 7, -6, 7]
 list4 = [-5, -1, -3]
+
+# p max_subsum_v1(list2)
+# p max_subsum_v1(list3)
+# p max_subsum_v1(list4)
+
+# p max_subsum_v2(list2)
+# p max_subsum_v2(list3)
+# p max_subsum_v2(list4)
