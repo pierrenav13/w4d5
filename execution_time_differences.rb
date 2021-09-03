@@ -24,12 +24,13 @@ def my_min_v2(list) #O(n)
 end
 
 list1 = [ 0, 3, 5, 4, -5, 10, 1, 90 ]
+
 # p my_min_v1(list1)
 # p my_min_v2(list1)
 
 #largest_contiguous_subsum
 
-def max_subsum_v1(list) #O(n^2)
+def max_subsum_v1(list) #O(n^4)
   sub_array_sums = []
 
   (0...list.length).each do |i|
@@ -40,18 +41,15 @@ def max_subsum_v1(list) #O(n^2)
   sub_array_sums.max
 end
 
-def max_subsum_v2(list)
+def max_subsum_v2(list) #O(n) time & O(1) space
   max = list.first
   sum = 0
 
   list.each do |num|
     sum = 0 if sum < 0
-
     sum += num
-
     max = sum if sum > max
   end
-
   max
 end
 
